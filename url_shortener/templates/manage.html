@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Zarządzanie linkami</title>
+</head>
+
+<body>
+    <h1>Twoje skrócone linki</h1>
+    <a href="/">← Powrót</a>
+    <hr>
+
+    {% for short, full in links %}
+    <div style="margin-bottom: 20px;">
+        <strong>Alias:</strong> {{ short }}<br>
+        <strong>Pełny link:</strong> <a href="{{ full }}" target="_blank">{{ full }}</a><br>
+        <strong>Skrócony:</strong> <a href="{{ host_url }}{{ short }}" target="_blank">{{ host_url }}{{ short }}</a><br>
+        <img src="/static/qrcodes/{{ short }}.png" alt="QR code" width="150"><br>
+        <form method="post" style="margin-top: 5px;">
+            <input type="hidden" name="delete" value="{{ short }}">
+            <button type="submit">🗑️ Usuń</button>
+        </form>
+    </div>
+    <hr>
+    {% else %}
+    <p>Brak skróconych linków.</p>
+    {% endfor %}
+</body>
+
+</html>

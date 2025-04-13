@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Skracanie URL</title>
+</head>
+
+<body>
+    <h1>Skróć swój link</h1>
+    <form method="POST">
+        <label for="url">Wklej pełny adres URL:</label>
+        <input type="text" name="url" id="url" required>
+        <br>
+        <label for="alias">Alias (opcjonalnie):</label>
+        <input type="text" name="alias" id="alias">
+        <br><br>
+        <button type="submit">Skróć link</button>
+    </form>
+
+    {% if short_url %}
+    <h3>Skrócony URL:</h3>
+    <p><a href="{{ short_url }}" target="_blank">{{ short_url }}</a></p>
+    <img src="{{ url_for('static', filename='qrcodes/' + qr_code.split('/')[-1]) }}" alt="QR Code">
+    {% endif %}
+
+    <hr>
+    <a href="{{ url_for('manage') }}">Przejdź do zarządzania linkami</a>
+</body>
+
+</html>
